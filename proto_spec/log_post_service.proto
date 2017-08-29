@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option go_package = "LogPost";
+package log_post;
+
+message EmptyMessage {}
+
+enum LogLevel {
+    // Discard all logs
+    NOOP = 0;
+    // Tracing is turned on.
+    TRACE = 1;
+    // Info logs. Used to log information relevant to app.
+    INFO = 2;
+    // Used to log errors.
+    ERROR = 4;
+    // Used to fatal situations.
+    FATAL = 8;
+}
+
+// Message used to register client with the LogServer
+message EpInfo {
+    string service_name = 1;
+    string service_version = 2;
+    string ip_addr = 3;
+    int32 log_level = 4;
+}
+
+message ConfigResp {
+    string client_id = 1;
+}
+
+// Log Message
+message LogMsg {
+    string client_id = 1;
+    int32 log_level = 2;
+    repeated string message = 3;
+}
+
+service LogPost {
+    rpc GetHeartBeat(EmptyMessage) returns (EmptyMessage) {}
+    rpc Register(EpInfo) returns (ConfigResp) {}
+    rpc LogReq(LogMsg) returns (EmptyMessage) {}
+}
