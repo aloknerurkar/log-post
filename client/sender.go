@@ -112,6 +112,8 @@ func startSender(endpoints []utils.ConnEndpointInfo, svc_name, svc_version strin
 				if (len(sender.traceQ) == 50) {
 					task := newSendListTask(sender, int32(LogPost.LogLevel_TRACE), sender.traceQ)
 					sender.runner.EnqueueTask(task)
+					//Reset the queue
+					sender.traceQ = nil
 				}
 
 			case msg := <- sender.ichan:
@@ -120,6 +122,8 @@ func startSender(endpoints []utils.ConnEndpointInfo, svc_name, svc_version strin
 				if (len(sender.infoQ) == 50) {
 					task := newSendListTask(sender, int32(LogPost.LogLevel_INFO), sender.infoQ)
 					sender.runner.EnqueueTask(task)
+					//Reset the queue
+					sender.infoQ = nil
 				}
 
 			case msg := <- sender.echan:

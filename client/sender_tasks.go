@@ -15,7 +15,7 @@ func newSendListTask(sendr *sender, level int32, msgList []string) *sendListTask
 	task := new(sendListTask)
 	task.sndr = sendr
 	task.lvl = level
-	task.msgs = msgList
+	copy(task.msgs, msgList)
 	return task
 }
 
