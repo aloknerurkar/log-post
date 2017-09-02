@@ -97,32 +97,32 @@ func (l *LogPostClient) PkgId() string {
 
 func (l *LogPostClient) TraceStart(format string, args... interface{}) {
 	msg := fmt.Sprintf(format, args...)
-	msg_wfuncname := fmt.Sprintf("Started FUNC:%s %s", utils.MyCaller(), msg)
+	msg_wfuncname := fmt.Sprintf("Started FUNC:%s %s\n", utils.MyCaller(), msg)
 	_ = l.trace.Output(3, msg_wfuncname)
 }
 
 func (l *LogPostClient) TraceEnd(format string, args... interface{}) {
 	msg := fmt.Sprintf(format, args...)
-	msg_wfuncname := fmt.Sprintf("End FUNC:%s %s", utils.MyCaller(), msg)
+	msg_wfuncname := fmt.Sprintf("End FUNC:%s %s\n", utils.MyCaller(), msg)
 	_ = l.trace.Output(3, msg_wfuncname)
 }
 
 func (l *LogPostClient) Info(format string, args... interface{}) {
 	msg := fmt.Sprintf(format, args...)
-	msg_wfuncname := fmt.Sprintf("FUNC:%s %s", utils.MyCaller(), msg)
+	msg_wfuncname := fmt.Sprintf("FUNC:%s %s\n", utils.MyCaller(), msg)
 	_ = l.info.Output(3, msg_wfuncname)
 }
 
 func (l *LogPostClient) Error(e error, format string, args... interface{}) error {
 	msg := fmt.Sprintf(format, args...)
-	msg_wfuncname := fmt.Sprintf("ERR:%s FUNC:%s %s", e.Error(), utils.MyCaller(), msg)
+	msg_wfuncname := fmt.Sprintf("ERR:%s FUNC:%s %s\n", e.Error(), utils.MyCaller(), msg)
 	_ = l.error.Output(3, msg_wfuncname)
 	return e
 }
 
 func (l *LogPostClient) Fatal(e error, format string, args... interface{}) {
 	msg := fmt.Sprintf(format, args...)
-	msg_wfuncname := fmt.Sprintf("ERR_FATAL:%s FUNC:%s %s", e.Error(), utils.MyCaller(), msg)
+	msg_wfuncname := fmt.Sprintf("ERR_FATAL:%s FUNC:%s %s\n", e.Error(), utils.MyCaller(), msg)
 	_ = l.fatal.Output(3, msg_wfuncname)
 	// Check handling of fatal stuff. Panic/Recover? Currently process exit may cause loss of msg.
 	os.Exit(1)
