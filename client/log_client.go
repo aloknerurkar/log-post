@@ -9,7 +9,8 @@ import (
 	"io/ioutil"
 )
 
-const LOG_FLAGS = log.Ldate | log.Ltime | log.Lmicroseconds | log.Llongfile
+// Full filename not required as of now.
+const LOG_FLAGS = log.Ldate | log.Ltime | log.Lmicroseconds | log.Lshortfile
 
 type LogPostClient struct {
 	PkgName string
@@ -92,7 +93,7 @@ func InitLogger(pkgName, pkgVersion string, logLevel int32, remote_sender bool) 
 }
 
 func (l *LogPostClient) PkgId() string {
-	return l.PkgName + ":" + l.PkgVersion
+	return l.PkgName + ":" + l.PkgVersion + "\t"
 }
 
 func (l *LogPostClient) TraceStart(format string, args... interface{}) {
