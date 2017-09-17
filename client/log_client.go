@@ -32,13 +32,12 @@ func InitLogger(pkgName, pkgVersion string, logLevel int32, remote_sender bool) 
 	client.PkgVersion = pkgVersion
 	client.remoteSender = remote_sender
 
-	endpoints := make([]utils.ConnEndpointInfo, 1)
+	endpoints := make([]interface{}, 1)
 	endpoints[0] = utils.ConnEndpointInfo{
 		Tls: false,
 		CertFile: "",
 		ServerHostOverride: "",
 		ServerAddr: "localhost:10000",
-
 	}
 
 	if client.remoteSender {

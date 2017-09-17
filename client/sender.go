@@ -66,7 +66,7 @@ var doHeartBeat = func(conn *grpc.ClientConn) error {
 	return err
 }
 
-func startSender(endpoints []utils.ConnEndpointInfo, svc_name, svc_version string) (*sender, error) {
+func startSender(endpoints []interface{}, svc_name, svc_version string) (*sender, error) {
 
 	sndr := new(sender)
 	sndr.clientPool = utils.NewRpcClientPool(doHeartBeat, endpoints, 1, os.Stdout)
